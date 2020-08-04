@@ -1,4 +1,4 @@
-package dev.herovitamin.hms.mlkitvsgooglevision.camara
+package dev.herovitamin.hms.mlkitvsgooglevision.camera
 
 import android.content.Context
 import android.content.res.Configuration
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.huawei.hms.mlsdk.common.LensEngine
 import java.io.IOException
 
-class CameraSourcePreview(context: Context?, attrs: AttributeSet?) : ViewGroup(context, attrs) {
+class CameraSourcePreview : ViewGroup {
 
     private val TAG = "CameraSourcePreview"
 
@@ -22,10 +22,10 @@ class CameraSourcePreview(context: Context?, attrs: AttributeSet?) : ViewGroup(c
 
     private var mOverlay: GraphicOverlay? = null
 
-    fun CameraSourcePreview(
+    constructor(
         context: Context?,
         attrs: AttributeSet?
-    ) {
+    ) : super(context, attrs) {
         mContext = context
         mStartRequested = false
         mSurfaceAvailable = false

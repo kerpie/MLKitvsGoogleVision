@@ -1,4 +1,4 @@
-package dev.herovitamin.hms.mlkitvsgooglevision.camara
+package dev.herovitamin.hms.mlkitvsgooglevision.camera
 
 import android.content.Context
 import android.graphics.Canvas

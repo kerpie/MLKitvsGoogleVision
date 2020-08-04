@@ -6,11 +6,11 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import com.huawei.hms.mlsdk.face.MLFace
 import com.huawei.hms.mlsdk.face.MLFaceShape
-import dev.herovitamin.hms.mlkitvsgooglevision.camara.GraphicOverlay
+import dev.herovitamin.hms.mlkitvsgooglevision.camera.GraphicOverlay
 import java.text.DecimalFormat
 import java.util.*
 
-class MLFaceGraphic(overlay: GraphicOverlay?, face: MLFace?) : GraphicOverlay.Graphic(overlay) {
+class MLFaceGraphic: GraphicOverlay.Graphic{
 
     private val BOX_STROKE_WIDTH = 8.0f
     private val LINE_WIDTH = 5.0f
@@ -33,7 +33,7 @@ class MLFaceGraphic(overlay: GraphicOverlay?, face: MLFace?) : GraphicOverlay.Gr
     @Volatile
     private var mFace: MLFace? = null
 
-    fun MLFaceGraphic(overlay: GraphicOverlay?, face: MLFace?) {
+    constructor(overlay: GraphicOverlay?, face: MLFace?): super(overlay) {
         mFace = face
         this.overlay = overlay
         val selectedColor = Color.WHITE

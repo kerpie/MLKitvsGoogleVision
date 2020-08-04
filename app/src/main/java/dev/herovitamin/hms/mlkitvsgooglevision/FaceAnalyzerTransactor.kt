@@ -3,14 +3,14 @@ package dev.herovitamin.hms.mlkitvsgooglevision
 import com.huawei.hms.mlsdk.common.MLAnalyzer
 import com.huawei.hms.mlsdk.common.MLAnalyzer.MLTransactor
 import com.huawei.hms.mlsdk.face.MLFace
-import dev.herovitamin.hms.mlkitvsgooglevision.camara.GraphicOverlay
+import dev.herovitamin.hms.mlkitvsgooglevision.camera.GraphicOverlay
 import dev.herovitamin.hms.mlkitvsgooglevision.ui.MLFaceGraphic
 
-class FaceAnalyzerTransactor(ocrGraphicOverlay: GraphicOverlay?): MLTransactor<MLFace> {
+class FaceAnalyzerTransactor: MLTransactor<MLFace> {
 
     private var mGraphicOverlay: GraphicOverlay? = null
 
-    fun FaceAnalyzerTransactor(ocrGraphicOverlay: GraphicOverlay?) {
+    constructor(ocrGraphicOverlay: GraphicOverlay?) {
         mGraphicOverlay = ocrGraphicOverlay
     }
 

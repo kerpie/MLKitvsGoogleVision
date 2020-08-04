@@ -12,8 +12,9 @@ import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.LensEngine
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzer
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting
-import dev.herovitamin.hms.mlkitvsgooglevision.camara.CameraSourcePreview
-import dev.herovitamin.hms.mlkitvsgooglevision.camara.GraphicOverlay
+import dev.herovitamin.hms.mlkitvsgooglevision.camera.CameraSourcePreview
+import dev.herovitamin.hms.mlkitvsgooglevision.camera.GraphicOverlay
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
 class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
@@ -23,12 +24,13 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
     private val CAMERA_PERMISSION_CODE = 2
     var analyzer: MLFaceAnalyzer? = null
     private var mLensEngine: LensEngine? = null
-    private var preview: CameraSourcePreview? = null
-    private var overlay: GraphicOverlay? = null
     private var lensType = LensEngine.BACK_LENS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.i("CHECK ME!", "onCreate() called")
+
         setContentView(R.layout.activity_main)
 
         this.createFaceAnalyzer()
