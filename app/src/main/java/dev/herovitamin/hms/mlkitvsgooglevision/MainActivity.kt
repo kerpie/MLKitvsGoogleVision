@@ -4,18 +4,21 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.util.SparseArray
 import android.widget.CompoundButton
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.LensEngine
+import com.huawei.hms.mlsdk.face.MLFace
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzer
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting
+import dev.herovitamin.hms.mlkitvsgooglevision.callback.OnFaceDetected
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
-class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
+class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener, OnFaceDetected {
 
     private val TAG = "LiveImageDetection"
 
@@ -57,20 +60,18 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
         analyzer = MLAnalyzerFactory.getInstance().getFaceAnalyzer(setting)
 
         // finish
-        analyzer?.setTransactor(FaceAnalyzerTransactor(overlay))
+        analyzer?.setTransactor(FaceAnalyzerTransactor(overlay, this))
         return analyzer
     }
 
     private fun createLensEngine() {
         val context = this.applicationContext
-        // todo step 3: add on-device lens engine
         mLensEngine = LensEngine.Creator(context, analyzer)
             .setLensType(lensType)
             .applyDisplayDimension(1600, 1024)
             .applyFps(25.0f)
             .enableAutomaticFocus(true)
             .create()
-        // finish
     }
 
     private fun requestCameraPermission() {
@@ -153,18 +154,8 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
         startLensEngine()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String?>,
-        grantResults: IntArray
-    ) {
-        if (requestCode != CAMERA_PERMISSION_CODE) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            return
-        }
-        if (grantResults.size != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            createLensEngine()
-            return
-        }
+    var counter = 0
+    override fun onSuccess(result: SparseArray<MLFace?>) {
+        Log.i(TAG, "onSuccess called ${counter++}")
     }
-
 }
