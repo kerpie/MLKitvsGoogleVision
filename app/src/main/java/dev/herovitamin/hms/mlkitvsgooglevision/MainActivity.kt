@@ -1,6 +1,7 @@
 package dev.herovitamin.hms.mlkitvsgooglevision
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -157,5 +158,10 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
     var counter = 0
     override fun onSuccess(result: SparseArray<MLFace?>) {
         Log.i(TAG, "onSuccess called ${counter++}")
+        Log.d(TAG, "onSuccess called ${counter++} " + result.toString() )
+        if( result.size() > 0){
+            intent = Intent(applicationContext, DetailActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

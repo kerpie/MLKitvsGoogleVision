@@ -22,10 +22,7 @@ class CameraSourcePreview : ViewGroup {
 
     private var mOverlay: GraphicOverlay? = null
 
-    constructor(
-        context: Context?,
-        attrs: AttributeSet?
-    ) : super(context, attrs) {
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         mContext = context
         mStartRequested = false
         mSurfaceAvailable = false

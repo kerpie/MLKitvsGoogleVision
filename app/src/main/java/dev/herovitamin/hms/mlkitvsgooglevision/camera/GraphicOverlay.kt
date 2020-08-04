@@ -30,7 +30,7 @@ class GraphicOverlay(context: Context?, attrs: AttributeSet?) : View(context, at
 
         fun translateX(x: Float): Float {
             return if (mOverlay!!.mFacing == LensEngine.FRONT_LENS) {
-                mOverlay.getWidth() - scaleX(x)
+                mOverlay.width - scaleX(x)
             } else {
                 scaleX(x)
             }
@@ -75,7 +75,7 @@ class GraphicOverlay(context: Context?, attrs: AttributeSet?) : View(context, at
 
 
 
-    protected override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         synchronized(mLock!!) {
             if (mPreviewWidth != 0 && mPreviewHeight != 0) {
