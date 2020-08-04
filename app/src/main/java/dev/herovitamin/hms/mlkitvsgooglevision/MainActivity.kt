@@ -12,8 +12,6 @@ import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.LensEngine
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzer
 import com.huawei.hms.mlsdk.face.MLFaceAnalyzerSetting
-import dev.herovitamin.hms.mlkitvsgooglevision.camera.CameraSourcePreview
-import dev.herovitamin.hms.mlkitvsgooglevision.camera.GraphicOverlay
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
@@ -95,6 +93,20 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
     override fun onResume() {
         super.onResume()
         this.startLensEngine()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        if (requestCode != CAMERA_PERMISSION_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            return
+        }
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            createLensEngine()
+            return
+        }
     }
 
     override fun onPause() {
