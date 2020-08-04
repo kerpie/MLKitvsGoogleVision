@@ -153,4 +153,18 @@ class MainActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener
         startLensEngine()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        if (requestCode != CAMERA_PERMISSION_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            return
+        }
+        if (grantResults.size != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            createLensEngine()
+            return
+        }
+    }
+
 }
